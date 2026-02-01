@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #ffd4e8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 0.3s;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            color: #d63384;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .heart-icon {
+            display: inline-block;
+            color: #ff006e;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            font-size: clamp(3rem, 10vw, 5rem);
+            margin: 1rem 0;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            10%, 30% {
+                transform: scale(1.1);
+            }
+            20%, 40% {
+                transform: scale(1);
+            }
+        }
+
+        .message {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: #8b3a62;
+            line-height: 1.8;
+            margin: 2rem 0;
+            font-weight: 300;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .valentine-btn {
+            background: linear-gradient(135deg, #ff006e 0%, #d63384 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3);
+        }
+
+        .valentine-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.4);
+        }
+
+        .yes-btn:hover {
+            background: linear-gradient(135deg, #ff1a82 0%, #e04c9a 100%);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            box-shadow: 0 10px 30px rgba(108, 117, 125, 0.3);
+        }
+
+        .no-btn:hover {
+            background: linear-gradient(135deg, #7d8a96 0%, #5a6268 100%);
+            box-shadow: 0 15px 40px rgba(108, 117, 125, 0.4);
+        }
+
+        .valentine-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Floating hearts animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 2rem;
+            color: rgba(255, 0, 110, 0.6);
+            animation: float-up linear infinite;
+        }
+
+        @keyframes float-up {
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 20%; animation-duration: 10s; animation-delay: 2s; font-size: 1.5rem; }
+        .heart:nth-child(3) { left: 30%; animation-duration: 12s; animation-delay: 4s; }
+        .heart:nth-child(4) { left: 40%; animation-duration: 9s; animation-delay: 1s; font-size: 2.5rem; }
+        .heart:nth-child(5) { left: 50%; animation-duration: 11s; animation-delay: 3s; }
+        .heart:nth-child(6) { left: 60%; animation-duration: 10s; animation-delay: 5s; font-size: 1.8rem; }
+        .heart:nth-child(7) { left: 70%; animation-duration: 13s; animation-delay: 2s; }
+        .heart:nth-child(8) { left: 80%; animation-duration: 9s; animation-delay: 6s; font-size: 2.2rem; }
+        .heart:nth-child(9) { left: 90%; animation-duration: 11s; animation-delay: 1s; }
+        .heart:nth-child(10) { left: 15%; animation-duration: 10s; animation-delay: 7s; font-size: 1.6rem; }
+
+        /* Response message */
+        .response {
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: #ff006e;
+            font-family: 'Playfair Display', serif;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .response.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .button-container {
+                gap: 0.75rem;
+            }
+
+            .valentine-btn {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts">
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+        <div class="heart">💖</div>
+        <div class="heart">💕</div>
+    </div>
+
+    <div class="container">
+        <h1>Happy Valentine's Day</h1>
+        <div class="heart-icon">💖</div>
+        <p class="message">
+            In a world full of ordinary moments,<br>
+            you make every day extraordinary.<br>
+            Thank you for being the magic in my life.
+        </p>
+        <div class="button-container">
+            <button class="valentine-btn yes-btn" onclick="openNewPage()">💖 Be My Valentine</button>
+            <button class="valentine-btn no-btn" onclick="handleNo()">No</button>
+        </div>
+        <div class="response" id="response"></div>
+    </div>
+
+    <script>
+        function openNewPage() {
+            // Navigate to the new page when "Be My Valentine" is clicked
+            window.location.href = 'valentine_yes.html';
+        }
+
+        function handleNo() {
+            const response = document.getElementById('response');
+            const messages = [
+                "Are you sure? 🥺",
+                "Please reconsider... 💔",
+                "My heart is breaking... 😢",
+                "Give me another chance? 🙏",
+                "You're breaking my heart... 💔"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            response.textContent = randomMessage;
+            response.classList.add('show');
+            
+            // Make the No button move away
+            const noBtn = document.querySelector('.no-btn');
+            const maxX = window.innerWidth - noBtn.offsetWidth - 100;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 100;
+            
+            const randomX = Math.random() * maxX;
+            const randomY = Math.random() * maxY;
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function showLove() {
+            const response = document.getElementById('response');
+            const messages = [
+                "You just made my heart skip a beat! 💕",
+                "Forever and always! 💖",
+                "You're the best thing that ever happened to me! 💗",
+                "My heart is yours! 💝",
+                "Together, always! 💞"
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            response.textContent = randomMessage;
+            response.classList.add('show');
+            
+            // Create burst of hearts
+            createHeartBurst();
+        }
+
+        function createHeartBurst() {
+            const container = document.body;
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = '💖';
+                heart.style.position = 'fixed';
+                heart.style.left = '50%';
+                heart.style.top = '50%';
+                heart.style.fontSize = '2rem';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '1000';
+                heart.style.transition = 'all 1.5s ease-out';
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    const angle = (Math.PI * 2 * i) / 20;
+                    const distance = 200 + Math.random() * 100;
+                    const x = Math.cos(angle) * distance;
+                    const y = Math.sin(angle) * distance;
+                    
+                    heart.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 360}deg)`;
+                    heart.style.opacity = '0';
+                }, 10);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 1500);
+            }
+        }
+
+        // Log page load for testing
+        console.log('Valentine page loaded successfully');
+        
+        // Test responsive behavior
+        window.addEventListener('resize', () => {
+            console.log('Window resized to:', window.innerWidth, 'x', window.innerHeight);
+        });
+    </script>
+</body>
+</html>
